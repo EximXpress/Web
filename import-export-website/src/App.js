@@ -34,7 +34,7 @@ function App() {
     setFormStatus('Sending...');
 
     try {
-      const response = await fetch('https://eximxpress-server.onrender.com/api/send-quote', {
+      const response = await fetch('https://web-8sc4.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
