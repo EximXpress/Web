@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 // API to handle quote form submission
-app.post('/api/send-quote', async (req, res) => {
+app.post('/api/quote', async (req, res) => {
   const { name, email, phone, message } = req.body;
 
   // Validate input fields
