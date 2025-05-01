@@ -17,7 +17,7 @@ function QuoteForm() {
     e.preventDefault();
     try {
       // Replace the URL below with your backend API URL
-      const response = await axios.post('https://api.eximxpress.com/api/send-quote', formData);
+      const response = await axios.post('https://eximxpress-server.onrender.com/api/send-quote', formData);
       if (response.data.success) {
         alert('Quote request sent successfully!');
         setFormData({ name: '', email: '', phone: '', message: '' });  // Reset form
