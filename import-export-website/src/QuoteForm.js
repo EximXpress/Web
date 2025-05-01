@@ -16,11 +16,14 @@ function QuoteForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('https://api.eximxpress.com/quote', formData);
-      alert('Request sent successfully!');
-      setFormData({ name: '', email: '', phone: '', message: '' });
+      // Replace the URL below with your backend API URL
+      const response = await axios.post('https://api.eximxpress.com/api/send-quote', formData);
+      if (response.data.success) {
+        alert('Quote request sent successfully!');
+        setFormData({ name: '', email: '', phone: '', message: '' });  // Reset form
+      }
     } catch (error) {
-      alert('Failed to send. Try again.');
+      alert('Failed to send request. Please try again.');
     }
   };
 
@@ -28,10 +31,45 @@ function QuoteForm() {
     <section style={{ padding: '4rem', textAlign: 'center' }}>
       <h2>Request a Quote</h2>
       <form onSubmit={handleSubmit} style={{ maxWidth: '500px', margin: 'auto', marginTop: '2rem' }}>
-        <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} required style={inputStyle} /><br/>
-        <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} required style={inputStyle} /><br/>
-        <input type="text" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} required style={inputStyle} /><br/>
-        <textarea name="message" placeholder="Your Message" value={formData.message} onChange={handleChange} required style={{...inputStyle, height: '120px'}} /><br/>
+        <input
+          type="text"
+          name="name"
+          placeholder="Your Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          style={inputStyle}
+        /><br />
+        
+        <input
+          type="email"
+          name="email"
+          placeholder="Your Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          style={inputStyle}
+        /><br />
+        
+        <input
+          type="text"
+          name="phone"
+          placeholder="Phone Number"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+          style={inputStyle}
+        /><br />
+        
+        <textarea
+          name="message"
+          placeholder="Your Message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+          style={{...inputStyle, height: '120px'}}
+        /><br />
+        
         <button type="submit" style={buttonStyle}>Send Request</button>
       </form>
     </section>

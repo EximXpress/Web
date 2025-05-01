@@ -7,8 +7,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
-app.use(express.json());
+app.use(cors({ origin: 'https://www.eximxpress.com' })); // Allow CORS from your frontend domain
+app.use(express.json()); // Parse JSON bodies
 
 // Nodemailer transporter setup
 const transporter = nodemailer.createTransport({
@@ -28,13 +28,15 @@ app.get('/', (req, res) => {
 app.post('/api/send-quote', async (req, res) => {
   const { name, email, phone, message } = req.body;
 
+  // Validate input fields
   if (!name || !email || !phone || !message) {
     return res.status(400).json({ success: false, message: 'Please fill all fields' });
   }
 
+  // Set up email options
   const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.TO_EMAIL,
+    from: process.env.EMAIL_USER, // Sender's email
+    to: process.env.TO_EMAIL, // Recipient's email (you can change this to your email)
     subject: 'New Quote Request',
     html: `
       <h2>Quote Request Details</h2>
@@ -46,11 +48,12 @@ app.post('/api/send-quote', async (req, res) => {
   };
 
   try {
+    // Send the email using Nodemailer
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ success: true, message: 'Quote sent successfully' });
+    res.status(200).json({ success: true, message: 'Quote request sent successfully' });
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).json({ success: false, message: 'Failed to send quote' });
+    res.status(500).json({ success: false, message: 'Failed to send quote request' });
   }
 });
 
