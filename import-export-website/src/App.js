@@ -34,7 +34,7 @@ function App() {
     setFormStatus('Sending...');
 
     try {
-      const response = await fetch('https://web-8sc4.onrender.com', {
+      const response = await fetch('https://web-8sc4.onrender.com/api/quote', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
