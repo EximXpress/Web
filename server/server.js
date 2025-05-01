@@ -8,8 +8,17 @@ const PORT = process.env.PORT || 5000;
 
 
 
+const allowedOrigins = ['https://www.eximxpress.com'];
+
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
+
 // Middleware
-app.use(cors({ origin: 'https://www.eximxpress.com' })); // Allow CORS from your frontend domain
+// app.use(cors({ origin: 'https://www.eximxpress.com' })); // Allow CORS from your frontend domain
 app.use(express.json()); // Parse JSON bodies
 
 // Nodemailer transporter setup
