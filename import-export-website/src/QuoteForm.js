@@ -16,7 +16,7 @@ function QuoteForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/send', formData);
+      await axios.post('https://api.eximxpress.com/quote', formData);
       alert('Request sent successfully!');
       setFormData({ name: '', email: '', phone: '', message: '' });
     } catch (error) {
