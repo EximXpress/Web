@@ -6,6 +6,8 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+
+
 // Middleware
 app.use(cors({ origin: 'https://www.eximxpress.com' })); // Allow CORS from your frontend domain
 app.use(express.json()); // Parse JSON bodies
